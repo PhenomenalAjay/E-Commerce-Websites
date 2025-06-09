@@ -1,0 +1,5 @@
+{
+    "versal":2,
+    "builds":[{"src":"./app.js","use":"@versal/node"}],
+    "routes":[{"src":"/(.*)","dest":"/"}]
+}
