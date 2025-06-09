@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Document</title>
+    <!-- Tailwind CSS -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body class="font-poppins m-0 p-0">
+    <!-- nav bar -->
+    <nav class="flex justify-between items-center p-4">
+        <h1 class="font-bold text-xl">Famous Shopin</h1>
+
+        <div class="flex space-x-5">
+            <p><a href="/" class="no-underline text-gray-900">Home</a></p>
+            <p><a href="/collection" class="no-underline text-gray-900">Collection</a></p>
+            <p><a href="/wishlist" class="no-underline text-gray-900">Wishlist</a></p>
+        </div>
+
+        <div class="block sm:hidden">
+            <i class="fa-solid fa-bars cursor-pointer" onclick="shownavbar()"></i>
+        </div>
+    </nav>
+
+    <!-- side navbar -->
+    <div class=" w-2/5 h-full fixed top-0 p-5 text-white transition-all duration-500 bg-blue-400" id="side-navbar"
+        style="right: -60%;">
+        <p class="text-right">
+            <i class="fa-solid fa-xmark cursor-pointer" onclick="closenavbar()"></i>
+        </p>
+        <div class="space-y-7">
+            <p><a href="/" class="no-underline text-white hover:underline">Home</a></p>
+            <p><a href="/collection" class="no-underline text-white hover:underline">Collection</a></p>
+            <p><a href="/wishlist" class="no-underline text-white hover:underline">Wishlist</a></p>
+        </div>
+    </div>
+
+
+
+    <h1 class="text-3xl font-bold mb-6 text-center">My Wishlist</h1>
+    <div id="wishlist-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <!-- Wishlist items will be rendered here -->
+    </div>
+
+
+<!-- Footer -->
+      <footer class="w-full fixed bottom-0 bg-gray-900 text-gray-200 p-4 text-center">
+         <div>
+            <h2 class="font-bold text-lg">Get in touch</h2>
+            
+            <div class="mt-2.5 flex gap-5 align-center justify-center">
+                <i class="fa-brands fa-instagram text-white"></i>
+                <i class="fa-brands fa-facebook text-white"></i>
+                <i class="fa-brands fa-twitter text-white"></i>
+            </div>
+            <p class="mt-2.5">2025 @FamousShopin</p>
+        </div>
+    </footer>
+
+
+    <script>
+        function getWishlist() {
+            const wishlist = localStorage.getItem("wishlist");
+            return wishlist ? JSON.parse(wishlist) : [];
+        }
+
+        function saveWishlist(wishlist) {
+            localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        }
+
+        function removeFromWishlist(productId) {
+            let wishlist = getWishlist();
+            wishlist = wishlist.filter(item => item.id !== productId);
+            saveWishlist(wishlist);
+            renderWishlist();
+        }
+
+        function renderWishlist() {
+            const container = document.getElementById("wishlist-container");
+            const wishlist = getWishlist();
+            container.innerHTML = "";
+
+            if (wishlist.length === 0) {
+                container.innerHTML = "<p class='text-gray-700 text-xl text-center'>Your wishlist is empty.</p>";
+                return;
+            }
+
+            wishlist.forEach(product => {
+                const productDiv = document.createElement("div");
+                productDiv.className = "bg-white p-4 rounded shadow flex flex-col items-center";
+
+                productDiv.innerHTML = `
+                    <img src="${product.image}" alt="${product.title}" class="h-40 object-contain mb-4" />
+                    <p class="text-center font-semibold mb-2">${product.title}</p>
+                    <button class="remove-btn bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition">Remove</button>
+                `;
+
+                const removeBtn = productDiv.querySelector(".remove-btn");
+                removeBtn.addEventListener("click", () => {
+                    removeFromWishlist(product.id);
+                });
+
+                container.appendChild(productDiv);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            renderWishlist();
+        });
+
+        //side navbar functionality
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has("focusSearch")) {
+                document.getElementById("search").focus();
+            }
+        };
+        var sidnav = document.querySelector("#side-navbar");
+
+        function shownavbar() {
+            sidnav.style.right = "0";
+        }
+        function closenavbar() {
+            sidnav.style.right = "-60%";
+        }
+    </script>
+
+</body>
+
+</html>

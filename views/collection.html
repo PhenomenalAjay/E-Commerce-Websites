@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Document</title>
+    <!-- Tailwind CSS -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Font awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body class="font-poppins m-0 p-0 bg-amber-200">
+    <!--nav bar-->
+    <nav class="flex justify-between items-center p-4">
+        <h1 class="font-bold text-xl">Famous Shopin</h1>
+
+        <div class="flex space-x-5">
+            <p><a href="/" class="no-underline text-gray-900">Home</a></p>
+            <p><a href="/collection" class="no-underline text-gray-900">Collection</a></p>
+            <p><a href="/wishlist" class="no-underline text-gray-900">Wishlist</a></p>
+        </div>
+
+        <div class="block sm:hidden">
+            <i class="fa-solid fa-bars cursor-pointer" onclick="shownavbar()"></i>
+        </div>
+    </nav>
+
+        <!-- side navbar -->
+<div class=" w-2/5 h-full fixed top-0 p-5 text-white transition-all duration-500 bg-blue-400"
+        id="side-navbar" style="right: -60%;">
+        <p class="text-right">
+            <i class="fa-solid fa-xmark cursor-pointer" onclick="closenavbar()"></i>
+        </p>
+        <div class="space-y-7">
+            <p><a href="/" class="no-underline text-white hover:underline">Home</a></p>
+            <p><a href="/collection" class="no-underline text-white hover:underline">Collection</a></p>
+            <p><a href="/wishlist" class="no-underline text-white hover:underline">Wishlist</a></p>
+        </div>
+    </div>
+
+
+    <!--product-->
+    <div class="mt-5 p-5">
+        <form class="flex justify-between items-center border-2 border-black rounded-full max-w-4xl mx-auto p-2">
+            <input
+                type="search"
+                id="search"
+                placeholder="Search for products"
+                class="w-full bg-transparent text-lg focus:outline-none"
+            />
+            <i class="fa-solid fa-magnifying-glass cursor-pointer"></i>
+        </form>
+    <div class="flex flex-wrap gap-4 justify-center mt-5" id="products">
+        <!-- Products will be dynamically loaded here -->
+    </div>
+
+    <!-- Product Detail Modal -->
+    <!-- Modal removed as per new small card design -->
+    <!-- Removed modal HTML as we will use product-detail-card div instead -->
+    </div>
+
+    <!-- Product Detail Card -->
+    <div id="product-detail-card" class="absolute bg-white border border-gray-500 rounded-md p-4 shadow-lg max-w-xs hidden z-50">
+        <h2 id="card-title" class="text-lg font-bold mb-2"></h2>
+        <p id="card-price" class="text-green-600 font-semibold mb-2"></p>
+        <p id="card-description" class="text-gray-700 mb-2"></p>
+        <p id="card-category" class="italic text-gray-500"></p>
+    </div>
+
+<!-- Footer -->
+      <footer class="w-full fixed bottom-0 bg-gray-900 text-gray-200 p-4 text-center">
+         <div>
+            <h2 class="font-bold text-lg">Get in touch</h2>
+            
+            <div class="mt-2.5 flex gap-5 align-center justify-center">
+                <i class="fa-brands fa-instagram text-white"></i>
+                <i class="fa-brands fa-facebook text-white"></i>
+                <i class="fa-brands fa-twitter text-white"></i>
+            </div>
+            <p class="mt-2.5">2025 @FamousShopin</p>
+        </div>
+    </footer>
+
+    <script>
+        //responsive page edit side bar
+        var sidnav = document.querySelector("#side-navbar");
+
+        function shownavbar() {
+            sidnav.style.right = "0";
+        }
+        function closenavbar() {
+            sidnav.style.right = "-60%";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const productContainer = document.getElementById("products");
+            const searchInput = document.getElementById("search");
+            let products = [];
+
+            // Fetch products from FakeStore API using axios
+            axios.get("https://fakestoreapi.com/products")
+                .then(response => {
+                    products = response.data;
+                    renderProducts(products);
+                })
+                .catch(error => {
+                    console.error("Error fetching products:", error);
+                    productContainer.innerHTML = "<p class='text-red-500'>Failed to load products.</p>";
+                });
+
+            // Render products dynamically with buttons
+            function renderProducts(productsToRender) {
+                productContainer.innerHTML = "";
+                productsToRender.forEach((product, index) => {
+                    const productDiv = document.createElement("div");
+                    productDiv.className = "text-center basis-1/5 border border-gray-300 p-4 rounded-md flex flex-col items-center justify-between";
+                    productDiv.style.height = "350px";
+                    productDiv.style.boxSizing = "border-box";
+                    productDiv.innerHTML = `
+                        <img src="${product.image}" alt="${product.title}" class="mx-auto h-40 object-contain" />
+                        <p class="mt-2 text-center">${product.title}</p>
+                        <div class="flex justify-around mt-2">
+                            <button class="view-product-btn bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition" data-index="${index}">View Product</button>
+                <button class="add-to-wishlist-btn bg-green-600 text-white ml-5 px-3 py-1 rounded hover:bg-green-700 transition" data-index="${index}">Add to Wishlist</button>
+                        </div>
+                    `;
+                    productContainer.appendChild(productDiv);
+                });
+
+                // Add event listeners for the new buttons
+                const viewButtons = document.querySelectorAll(".view-product-btn");
+                viewButtons.forEach(button => {
+                    button.addEventListener("click", (event) => {
+                        const idx = event.target.getAttribute("data-index");
+                        showProductDetail(products[idx], event.target);
+                    });
+                });
+
+                // Wishlist management functions
+                function getWishlist() {
+                    const wishlist = localStorage.getItem("wishlist");
+                    return wishlist ? JSON.parse(wishlist) : [];
+                }
+
+                function saveWishlist(wishlist) {
+                    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+                }
+
+                function addToWishlist(product) {
+                    const wishlist = getWishlist();
+                    if (!wishlist.find(item => item.id === product.id)) {
+                        wishlist.push(product);
+                        saveWishlist(wishlist);
+                        alert(`Added "${product.title}" to wishlist!`);
+                    } else {
+                        alert(`"${product.title}" is already in your wishlist.`);
+                    }
+                }
+
+                const addToWishlistButtons = document.querySelectorAll(".add-to-wishlist-btn");
+                addToWishlistButtons.forEach(button => {
+                    button.addEventListener("click", (event) => {
+                        const idx = event.target.getAttribute("data-index");
+                        addToWishlist(products[idx]);
+                    });
+                });
+            }
+
+            // Search functionality
+            searchInput.addEventListener("keyup", function (event) {
+                const enteredValue = event.target.value.toUpperCase();
+                const filteredProducts = products.filter(product =>
+                    product.title.toUpperCase().includes(enteredValue)
+                );
+                renderProducts(filteredProducts);
+            });
+        });
+
+        // Product modal elements
+        // Removed modal related elements and functions
+
+        // Function to show product details in the product-detail-card div
+        const productDetailCard = document.getElementById("product-detail-card");
+        const cardTitle = document.getElementById("card-title");
+        const cardPrice = document.getElementById("card-price");
+        const cardDescription = document.getElementById("card-description");
+        const cardCategory = document.getElementById("card-category");
+
+        function showProductDetail(product, buttonElement) {
+            cardTitle.textContent = product.title;
+            cardPrice.textContent = "$" + product.price.toFixed(2);
+            cardDescription.textContent = product.description;
+            cardCategory.textContent = "Category: " + product.category;
+
+            // Position the detail card near the clicked button
+            const rect = buttonElement.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            productDetailCard.style.top = (rect.bottom + scrollTop + 10) + "px";
+            productDetailCard.style.left = rect.left + "px";
+
+            productDetailCard.classList.remove("hidden");
+
+            // Add blur to other products except the selected one
+            const productCards = document.querySelectorAll("#products > div");
+            productCards.forEach(card => {
+                if (!card.contains(buttonElement)) {
+                    card.classList.add("blurred");
+                } else {
+                    card.classList.remove("blurred");
+                }
+            });
+        }
+
+        // Hide product detail card when clicking outside of it
+        document.addEventListener("click", (event) => {
+            if (!productDetailCard.contains(event.target) && !event.target.classList.contains("view-product-btn")) {
+                productDetailCard.classList.add("hidden");
+
+                // Remove blur from all product cards
+                const productCards = document.querySelectorAll("#products > div");
+                productCards.forEach(card => {
+                    card.classList.remove("blurred");
+                });
+            }
+        });
+    </script>
+    <style>
+        /* Blur effect for non-selected products */
+        .blurred {
+            filter: blur(2px);
+            transition: filter 0.3s ease;
+        }
+    </style>
+</body>
+
+</html>

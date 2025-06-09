@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Document</title>
+    <!-- Tailwind CSS -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body class="font-poppins m-0 p-0">
+    <!-- nav bar -->
+    <nav class="flex justify-between items-center p-4">
+        <h1 class="font-bold text-xl">Famous Shopin</h1>
+
+        <div class="flex space-x-5">
+            <p><a href="/" class="no-underline text-gray-900">Home</a></p>
+            <p><a href="/collection" class="no-underline text-gray-900">Collection</a></p>
+            <p><a href="/wishlist" class="no-underline text-gray-900">Wishlist</a></p>
+        </div>
+
+        <div class="block sm:hidden">
+            <i class="fa-solid fa-bars cursor-pointer" onclick="shownavbar()"></i>
+        </div>
+    </nav>
+
+    <!-- side navbar -->
+    <div class=" w-2/5 h-full fixed top-0 p-5 text-white transition-all duration-500 bg-blue-400" id="side-navbar"
+        style="right: -60%;">
+        <p class="text-right">
+            <i class="fa-solid fa-xmark cursor-pointer" onclick="closenavbar()"></i>
+        </p>
+        <div class="space-y-7">
+            <p><a href="/" class="no-underline text-white hover:underline">Home</a></p>
+            <p><a href="/collection" class="no-underline text-white hover:underline">Collection</a></p>
+            <p><a href="/wishlist" class="no-underline text-white hover:underline">Wishlist</a></p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="flex justify-center gap-12 p-12  ">
+        <div>
+            <h1 class="font-extrabold text-2xl mb-2">Level up your products</h1>
+            <p class="mb-4">With our Collection</p>
+            <button id="shop-now-button" class="px-5 py-2.5 mt-2.5 bg-black text-white rounded">
+                Shop now
+            </button>
+        </div>    
+        <div class="images">
+            <!-- IMAGES -->
+        </div>       
+    </div>
+     
+        
+    <!-- Service -->
+    <div class="p-5">
+        <div class="flex justify-between items-center">
+            <!-- <div>
+                <h2 class="font-bold text-lg absolute left-80 bottom-50">Fast Delivery</h2>
+                <h2 class="font-bold text-lg ">Customer Experience</h2>
+            </div> -->
+
+        </div>
+        <div class="flex justify-between items-center gap-2.5 flex-col sm:flex-row mt-14 fixed">
+            <div class="bg-blue-100 rounded p-4">
+                <i class="fa-regular fa-face-smile"></i>
+                <h4 class="font-bold">Satisfaction garentee</h4>
+                <p>We ensure that our Customer have the best shopping Experience</p>
+            </div>
+            <div class="bg-blue-100 rounded p-4">
+                <i class="fa-regular fa-face-smile"></i>
+                <h4 class="font-bold">New arrival</h4>
+                <p>Discover the latest trends with our brand-new arrivals fresh styles just landed!
+                    Be the first to shop our newest collection before it's gone.</p>
+            </div>
+            <div class="bg-blue-100 rounded p-4">
+                <i class="fa-regular fa-face-smile"></i>
+                <h4 class="font-bold">Fast and free shipping</h4>
+                <p>Enjoy lightning-fast delivery at no extra cost no minimum required!
+                    We ship your favorites quickly and free, straight to your doorstep.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- frontpage collection -->
+    <!-- <div id="new-arrival-section">
+        <h2 class="p-5 font-bold">New Arrival</h2>
+        <div class="flex flex-wrap justify-evenly gap-2.5">
+            <div class="relative basis-1/5">
+                <img src="images/Inspiron-5430-laptop_200x200.jpg" alt="" class="rounded" />
+            </div>
+            <div class="relative basis-1/5">
+                <img src="images/sam 0.webp" alt="" class="rounded" />
+            </div>
+            <div class="relative basis-1/5">
+                <img src="images/sam 1.png" alt="" class="rounded" />
+            </div>
+            <div class="relative basis-1/5">
+                <img src="images/sam 2.png" alt="" class="rounded" />
+            </div>
+        </div>
+    </div> -->
+
+    <!-- <div id="most-wanted-section">
+        <h2 class="p-5">Most wanted</h2>
+        <div class="flex flex-wrap justify-evenly gap-2.5">
+            <div class="relative basis-1/5">
+                <img src="images/Inspiron-5430-laptop_200x200.jpg" alt="" class="rounded" />
+                <button
+                    class="absolute top-3/4 left-1/5 px-10 py-5 mt-2.5 text-[#1d232c] rounded-lg"
+                >
+                    Shop now<i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+            <div class="relative basis-1/5">
+                <img src="images/sam 0.webp" alt="" class="rounded" />
+                <button
+                    class="absolute top-3/4 left-1/5 px-10 py-5 mt-2.5 text-[#1d232c] rounded-lg"
+                >
+                    Shop now<i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+            <div class="relative basis-1/5">
+                <img src="images/sam 1.png" alt="" class="rounded" />
+                <button
+                    class="absolute top-3/4 left-1/5 px-10 py-5 mt-2.5 text-[#1d232c] rounded-lg"
+                >
+                    Shop now<i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+            <div class="relative basis-1/5">
+                <img src="images/sam 2.png" alt="" class="rounded" />
+                <button
+                    class="absolute top-3/4 left-1/5 px-10 py-5 mt-2.5 text-[#1d232c] rounded-lg"
+                >
+                    Shop now<i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div> -->
+
+<!-- Footer -->
+      <footer class="w-full fixed bottom-0 bg-gray-900 text-gray-200 p-4 text-center">
+         <div>
+            <h2 class="font-bold text-lg">Get in touch</h2>
+            
+            <div class="mt-2.5 flex gap-5 align-center justify-center">
+                <i class="fa-brands fa-instagram text-white"></i>
+                <i class="fa-brands fa-facebook text-white"></i>
+                <i class="fa-brands fa-twitter text-white"></i>
+            </div>
+            <p class="mt-2.5">2025 @FamousShopin</p>
+        </div>
+    </footer>
+
+    <script>
+
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has("focusSearch")) {
+                document.getElementById("search").focus();
+            }
+
+            const imagesDiv = document.querySelector('.images');
+            let products = [];
+            let currentIndex = 0;
+
+            async function fetchProducts() {
+                try {
+                    const response = await fetch('https://fakestoreapi.com/products');
+                    products = await response.json();
+                    startImageRotation();
+                } catch (error) {
+                    console.error('Error fetching products:', error);
+                }
+            }
+
+            function startImageRotation() {
+                if (products.length === 0) return;
+                setInterval(() => {
+                    currentIndex = (currentIndex + 1) % products.length;
+                    // Clear previous image
+                    imagesDiv.innerHTML = '';
+                    // Create new image element
+                    const img = document.createElement('img');
+                    img.src = products[currentIndex].image;
+                    img.style.maxWidth = '50%';
+                    img.style.maxHeight = '300px';
+                    imagesDiv.appendChild(img);
+                }, 2000);
+            }
+
+            fetchProducts();
+        };
+        var sidnav = document.querySelector("#side-navbar");
+
+        function shownavbar() {
+            sidnav.style.right = "0";
+        }
+        function closenavbar() {
+            sidnav.style.right = "-60%";
+        }
+
+        document.getElementById("shop-now-button").addEventListener("click", function () {
+            window.location.href = "/collection?focusSearch=true";
+        });
+    </script>
+</body>
+
+</html>
