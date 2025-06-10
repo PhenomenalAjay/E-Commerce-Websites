@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- my css -->
+    <link rel="stylesheet" href="style1.css">
+    <!-- Google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!--Font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="contact-body">
+    <!--nav bar-->
+    <nav class="navbar">
+        <h1>Gadgets Shopin</h1>
+
+        <div class="navbar-links">
+            <p class="navbar-link"><a href="index.html">Home</a></p>
+            <p class="navbar-link"><a href="collection.html">Collection</a></p>
+            <p class="navbar-link"><a href="contact.html">Contact</a></p>
+        </div>
+<!--side navbar-->
+        <div class="navbar-menu-toggle" >
+            <i class="fa-solid fa-bars" onclick="shownavbar()"></i>
+        </div>
+    </nav>
+    <div class="side-navbar" >
+        <p style="text-align: right;">
+            <i class="fa-solid fa-xmark" onclick="closenavbar()"></i>
+        </p>
+
+        <div class="side-navbar-links">
+            <p class="side-navbar-link"><a href="index.html">Home</a></p>
+            <p class="side-navbar-link"><a href="collection.html">Collection</a></p>
+            <p class="side-navbar-link"><a href="contact.html">Contact</a></p>
+        </div>
+    </div>
+
+    <!--input content -->
+    <div class="contact">
+        <div class="center">
+            <label for="">Name</label><input type="text" class="contact-input"size="58">
+            <label for="">E-Mail</label><input type="email" class="contact-input" size="58">
+            <label for="">Message</label><textarea class="contact-input" rows="5" cols="55"></textarea>
+            <button class="send-button"> Send</button>
+        </div>
+    </div>
+
+    <!--Footer-->
+    <div class="footer">
+        <div class="footer-container">
+            <div class="footer-box-1">
+                <h2 class="headingText">Get in touch</h2>
+                <p style="margin-top: 10px;">Assumenda harum dolorem est in minima velit excepturi accusantium fugiat, aliquam unde pariatur distinctio exercitatio</p>
+                <div class="footer-icon-container">
+                    <i class="fa-brands fa-instagram" style="color:white"></i>    
+                    <i class="fa-brands fa-facebook" style="color:white"></i>
+                    <i class="fa-brands fa-twitter" style="color:white"></i>
+                </div>
+                <p style="margin-top: 10px;">@2025Gadgetlive.com</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="collection.js"></script>
+
+</body>
+
+</html>
